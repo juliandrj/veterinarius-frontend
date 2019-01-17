@@ -1,0 +1,38 @@
+{
+  "name": "veterinarius-frontend",
+  "private": true,
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "bootstrap": "~4.0.0-alpha.6",
+    "modernizr": "~2.8.1",
+    "knockout": "^3.4.2",
+    "underscore": "^1.9.1",
+    "sammy": "^0.7.6",
+    "animate.css": "^3.7.0",
+    "font-awesome": "^5.6.3"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "scss/bootstrap.scss",
+        "dist/js/bootstrap.js"
+      ]
+    },
+    "font-awesome": {
+      "main": [
+        "scss/solid.scss",
+        "scss/brands.scss",
+        "scss/fontawesome.scss"
+      ]
+    },
+    "sammy": {
+      "main": [
+        "lib/sammy.js"
+      ]
+    }
+  }
+}

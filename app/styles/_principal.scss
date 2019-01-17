@@ -1,0 +1,69 @@
+body {
+	margin: 0 !important;
+	padding: 0 !important;
+	background-color: transparent !important;
+}
+
+%full-screen {
+	width: 100vw;
+  height: 100vh;
+	margin: 0;
+	padding: 0;
+}
+
+.full-screen {
+	@extend %full-screen;
+}
+
+.fondo-oscuro-t25 {
+	background-color: $dark-transparency-25;
+}
+
+.fondo-oscuro-t50 {
+	background-color: $dark-transparency-50;
+}
+
+.fondo-oscuro-t75 {
+	background-color: $dark-transparency-75;
+}
+
+.texto-grande {
+	font-size: 5em;
+}
+
+.login-screen {
+  @extend %full-screen;
+	background: url(../images/ginger.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+article.login div.card {
+	background-color: $light-transparency-50;
+}
+
+.login img.card-img-top {
+	max-width: 200px !important;
+	margin: 0 auto;
+	padding-top: 0.5em;
+}
+
+body.main-screen {
+	padding-top: 60px !important;
+}
+
+.main-screen section.main {
+	min-height: calc(100vh - 120px);
+}
+
+section.footer {
+	min-height: 40px;
+	margin-top: 6px;
+	padding: 7px 0;
+	background-color: theme-color('dark');
+	color: gray('100');
+	text-align: center;
+	font-size: 0.6em;
+}
