@@ -1,3 +1,5 @@
+$.cookie.json = true;
+var cookieOptions = {expires:15/1440,path:'/',domain:'.veterinarius.com'};
 $(document).ajaxSend(function (event, xhr, settings) {
 	settings.xhrFields = {
 		withCredentials: true
@@ -71,4 +73,16 @@ $.enviarPost = function (url, data, callback, errorCallback = undefined, credent
     success: callback,
     error: errorCallback
   });
+};
+function armarMenu (opcs, opcpadre = undefined) {
+	var menu = [];
+	var mainOpcs = _.where(opcs, {opcion_padre: _.isUndefined(opcpadre) ? null : opcpadre.id});
+	if (_.isUndefined(mainOpcs)) {
+		return menu;
+	}
+	_.each(mainOpcs, function (opc) {
+		opc.opciones = armarMenu(opcs, opc);
+		menu.push(opc);
+	});
+	return menu;
 };

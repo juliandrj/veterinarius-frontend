@@ -14,10 +14,19 @@ var LoginVM = function () {
     return !_.isUndefined(self.user()) && !_.isUndefined(self.token);
   }, self);
   self.init = function () {
-    if (!_.isUndefined(vm.login.user())) {
+    if (self.validarCookie()) {
       location.href = '#!/menu';
     }
   };
+	self.validarCookie = function () {
+		var uc = $.cookie('xJUAtAvmfgxAsz6D');
+    if (!_.isUndefined(uc)) {
+			self.token = uc.token;
+			self.user(uc.usuario);
+      return true;
+    }
+		return false;
+	};
   self.login = function () {
     var loginData = {
       username: self.usuario(),
@@ -29,10 +38,12 @@ var LoginVM = function () {
       self.usuario(undefined);
       self.password(undefined);
       $.enviarGet('http://backend.veterinarius.com:8000/api/v1/rest-auth/user/', undefined,
-      function (data) {
-        self.user(data);
-        location.href = '#!/menu';
-      });
+	      function (data) {
+	        self.user(data);
+					$.cookie('xJUAtAvmfgxAsz6D',{token:self.token,usuario:data},cookieOptions);
+	        location.href = '#!/menu';
+	      }
+			);
     },
     function (jqXHR, textStatus, errorThrow) {
       self.usuario(undefined);
@@ -40,14 +51,17 @@ var LoginVM = function () {
       vm.main.aviso({level:1, header:'Acceso', body:'Tus credenciales incorrectas, intenta nuevamente', closeable: true});
     }, false);
   };
-  self.logout = function (goHome = true) {
+  self.logout = function () {
+		$.removeCookie('xJUAtAvmfgxAsz6D',cookieOptions);
+		self.user(undefined);
+		self.token = undefined;
     $.enviarPost('http://backend.veterinarius.com:8000/api/v1/rest-auth/logout/', undefined,
     function (data) {
-      self.user(undefined);
-      self.token = undefined;
-      if (goHome) {
-        location.href = '#!/';
-      }
-    });
+      location.href = '#!/';
+    },
+		function (jqXHR, textStatus, errorThrow) {
+			vm.main.aviso({level:1, header:'Salir', body:errorThrow, closeable: true});
+			location.href = '#!/';
+		});
   };
 };

@@ -4,7 +4,7 @@ var vm = {
   menu: new MenuVM()
 };
 $(document).ready(function () {
-	//vm.main.init();
+	vm.main.init();
 	ko.applyBindings(vm);
 	var app = $.sammy('#main', function() {
 		this.get('/', function () {
@@ -16,7 +16,7 @@ $(document).ready(function () {
 			vm.main.loading(true);
 			var vista = this.params.view;
 			console.log('vista: ' + vista);
-			this.partial('html/' + vista + '.html').then(function(){
+			var x = this.partial('html/' + vista + '.html').then(function(){
 				renderizar(vista);
 				vm.main.loading(false);
 			});
