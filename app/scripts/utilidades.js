@@ -86,3 +86,8 @@ function armarMenu (opcs, opcpadre = undefined) {
 	});
 	return menu;
 };
+var personaSel = function (persona) {
+	var me = this;
+	me.value = persona;
+	me.label = persona.usuario.first_name + ' ' + persona.usuario.last_name;
+}

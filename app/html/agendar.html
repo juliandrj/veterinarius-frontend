@@ -1,0 +1,67 @@
+<article class="container-fluid" data-bind="with: vm.agendar">
+  <h2>Agendar cita:</h2>
+  <form>
+    <div class="row form-group">
+      <label for="sel-propietarios" class="col-md-2 col-form-label">Propietarios:</label>
+      <div class="col-md-10">
+        <select id="sel-propietarios" class="form-control" data-bind="options: propietarios, optionsText: 'label', value: propietario, optionsCaption: 'seleccione un propietario...'"></select>
+      </div>
+    </div>
+    <div class="row form-group">
+      <label for="sel-mascotas" class="col-md-2 col-form-label">Mascota:</label>
+      <div class="col-md-10">
+        <select id="sel-mascotas" class="form-control" data-bind="options: mascotas, optionsText: 'nombre', value: mascota, optionsCaption: 'seleccione una mascota...'"></select>
+      </div>
+    </div>
+    <div class="row form-group">
+      <label for="sel-medicos" class="col-md-2 col-form-label">M&eacute;dico:</label>
+      <div class="col-md-10">
+        <select id="sel-medicos" class="form-control" data-bind="enable: mascota, options: medicos, optionsText: 'label', value: medico, optionsCaption: 'seleccione un medico...'"></select>
+      </div>
+    </div>
+  </form>
+  <div id="div-agenda"></div>
+  <div id="mdl-cita" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- ko if: evento -->
+          <h3 class="modal-title">Cita para <small data-bind="text: evento().title"></small></h3>
+          <!-- /ko -->
+          <!-- ko ifnot: evento -->
+          <h3 class="modal-title" data-bind="if: mascota">Cita para <small data-bind="text: mascota().nombre"></small></h3>
+          <!-- /ko -->
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="row form-group">
+              <label for="txt-fecha-ini" class="col-md-2 col-form-label">Fecha y hora (inicio):</label>
+              <div class="col-md-10">
+                <input type="text" class="form-control" id="txt-fecha-ini" placeholder="AAAA-MM-DD hh:mm:ss" data-bind="value: fechaInicio">
+              </div>
+            </div>
+            <div class="row form-group">
+              <label for="txt-fecha-fin" class="col-md-2 col-form-label">Fecha y hora (hasta):</label>
+              <div class="col-md-10">
+                <span data-bind="text: fechaFin"></span>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal" data-bind="click: actualizar">
+            <i class="fas fa-save"></i> salvar
+          </button>
+          <!-- ko if: evento -->
+          <button type="button" class="btn btn-danger" data-dismiss="modal" data-bind="click: eliminar">
+            <i class="fas fa-trash"></i> eliminar
+          </button>
+          <!-- /ko -->
+          <button type="button" class="btn btn-primary" data-dismiss="modal">
+            <i class="fas fa-times"></i> cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

@@ -14,7 +14,14 @@
               <label for="usrpsw">Contrase&ntilde;a:</label>
               <input type="password" class="form-control" id="usrpsw" placeholder="password" data-bind="value: password" />
             </div>
-            <button id="btn-login" type="button" class="btn btn-primary" data-bind="enable: puedeHacerLogin, click: login">Enviar</button>
+            <div class="row">
+              <div class="col text-center">
+                <button id="btn-login" type="button" class="btn btn-primary" data-bind="enable: puedeHacerLogin, click: login">Entrar</button>
+              </div>
+              <div class="col text-center">
+                <button id="btn-forget" type="button" class="btn btn-primary">Recuperar contrase&ntilde;ar</button>
+              </div>
+            </div>
           </form>
         </div>
       </div>

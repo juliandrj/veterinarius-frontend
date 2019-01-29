@@ -12,6 +12,7 @@
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="/bower_components/animate.css/animate.css" />
+    <link rel="stylesheet" href="/bower_components/fullcalendar/dist/fullcalendar.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -98,7 +99,7 @@
   				<!-- ko if: aviso().closeable -->
   				<div class="modal-footer">
   					<button type="button" class="btn btn-primary" data-dismiss="modal">
-  						<i class="fas fa-times"></i> cerrar</span>
+  						<i class="fas fa-times"></i> cerrar
   					</button>
   				</div>
   				<!-- /ko -->
@@ -133,6 +134,9 @@
     <script src="/bower_components/underscore/underscore.js"></script>
     <script src="/bower_components/sammy/lib/sammy.js"></script>
     <script src="/bower_components/jquery.cookie/jquery.cookie.js"></script>
+    <script src="/bower_components/moment/moment.js"></script>
+    <script src="/bower_components/fullcalendar/dist/fullcalendar.js"></script>
+    <script src="/bower_components/fullcalendar/dist/locale/es.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -155,6 +159,7 @@
     <script src="scripts/00-mainvm.js"></script>
     <script src="scripts/01-loginvm.js"></script>
     <script src="scripts/02-menuvm.js"></script>
+    <script src="scripts/03-agendavm.js"></script>
     <script src="scripts/main.js"></script>
     <!-- endbuild -->
   </body>

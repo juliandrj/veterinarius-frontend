@@ -1,7 +1,8 @@
 var vm = {
 	main: new MainVM(),
   login: new LoginVM(),
-  menu: new MenuVM()
+  menu: new MenuVM(),
+	agendar: new AgendarVM()
 };
 $(document).ready(function () {
 	vm.main.init();
