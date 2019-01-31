@@ -1,5 +1,11 @@
 $.cookie.json = true;
 var cookieOptions = {expires:15/1440,path:'/',domain:'.veterinarius.com'};
+$.datetimepicker.setLocale('es');
+$.datetimepicker.setDateFormatter('moment');
+var es = {
+	months: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+	dayOfWeek: ['Dom','Lun','Mar','Mie','Jue','Vie','Sáb']
+};
 $(document).ajaxSend(function (event, xhr, settings) {
 	settings.xhrFields = {
 		withCredentials: true
@@ -57,7 +63,7 @@ $.enviarGet = function (url, data, callback, errorCallback = undefined, credenti
     error: errorCallback
   });
 };
-$.enviarPost = function (url, data, callback, errorCallback = undefined, credentials = true) {
+$.enviarPeticion = function (url, tipo, data, callback, errorCallback = undefined, credentials = true) {
 	var headers = vm && vm.login && vm.login.token ? {'Authorization': 'JWT ' + vm.login.token} : {};
   return $.ajax({
 		crossDomain: true,
@@ -65,7 +71,7 @@ $.enviarPost = function (url, data, callback, errorCallback = undefined, credent
 			withCredentials: credentials
 		},
 		headers: headers,
-    type: 'POST',
+    type: tipo,
     url: url,
     contentType: 'application/json; charset=utf-8',
     data: ko.toJSON(data),
@@ -73,6 +79,15 @@ $.enviarPost = function (url, data, callback, errorCallback = undefined, credent
     success: callback,
     error: errorCallback
   });
+};
+$.enviarPost = function (url, data, callback, errorCallback = undefined, credentials = true) {
+	$.enviarPeticion(url, 'POST', data, callback, errorCallback, credentials);
+};
+$.enviarPut = function (url, data, callback, errorCallback = undefined, credentials = true) {
+	$.enviarPeticion(url, 'PUT', data, callback, errorCallback, credentials);
+};
+$.enviarDelete = function (url, data, callback, errorCallback = undefined, credentials = true) {
+	$.enviarPeticion(url, 'DELETE', data, callback, errorCallback, credentials);
 };
 function armarMenu (opcs, opcpadre = undefined) {
 	var menu = [];
