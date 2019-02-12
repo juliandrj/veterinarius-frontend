@@ -5,11 +5,15 @@ const browserSync = require('browser-sync').create();
 const del = require('del');
 const wiredep = require('wiredep').stream;
 const runSequence = require('run-sequence');
+const template = require('gulp-template');
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
 let dev = true;
+var environments = require('gulp-environments');
+var development = environments.development;
+var production = environments.production;
 
 gulp.task('styles', () => {
   return gulp.src('app/styles/*.scss')
@@ -28,6 +32,8 @@ gulp.task('styles', () => {
 
 gulp.task('scripts', () => {
   return gulp.src('app/scripts/**/*.js')
+    .pipe(development(template({host: 'http://backend.veterinarius.com:8080'})))
+    .pipe(production(template({host: 'http://backend.veterinarius.com:8000'})))
     .pipe($.plumber())
     .pipe($.if(dev, $.sourcemaps.init()))
     .pipe($.babel())

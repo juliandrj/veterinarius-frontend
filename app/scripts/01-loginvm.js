@@ -33,12 +33,12 @@ var LoginVM = function () {
       username: self.usuario(),
       password: self.password()
     };
-    $.enviarPost('http://backend.veterinarius.com:8000/api/v1/api-token-auth/', loginData,
+    $.enviarPost('<%= host %>/api/v1/api-token-auth/', loginData,
     function (data) {
       self.token = data.token;
       self.usuario(undefined);
       self.password(undefined);
-      $.enviarGet('http://backend.veterinarius.com:8000/api/v1/rest-auth/user/', undefined,
+      $.enviarGet('<%= host %>/api/v1/rest-auth/user/', undefined,
 	      function (data) {
 					vm.main.loading(false);
 	        self.user(data);
@@ -55,7 +55,7 @@ var LoginVM = function () {
   };
   self.logout = function () {
 		$.removeCookie('xJUAtAvmfgxAsz6D',cookieOptions);
-    $.enviarPost('http://backend.veterinarius.com:8000/api/v1/rest-auth/logout/', undefined,
+    $.enviarPost('<%= host %>/api/v1/rest-auth/logout/', undefined,
     function (data) {
 			self.user(undefined);
 			self.token = undefined;

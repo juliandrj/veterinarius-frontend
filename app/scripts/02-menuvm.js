@@ -7,7 +7,7 @@ var MenuVM = function () {
       location.href = '#!/';
       return;
     }
-    $.enviarGet('http://backend.veterinarius.com:8000/api/v1/menu/', undefined,
+    $.enviarGet('<%= host %>/api/v1/menu/', undefined,
       function (data) {
         self.menu(armarMenu(data));
       },

@@ -7,7 +7,7 @@ var AgendarVM = function () {
       self.mascotas([]);
       return;
     }
-    $.enviarGet('http://backend.veterinarius.com:8000/api/v1/mascota/', {propietario: p.id},
+    $.enviarGet('<%= host %>/api/v1/mascota/', {propietario: p.id},
     function (data) {
       self.mascotas(data);
     },
@@ -23,7 +23,7 @@ var AgendarVM = function () {
     if (!self.mascota() || !m) {
       return;
     }
-    $.enviarGet('http://backend.veterinarius.com:8000/api/v1/agenda/', {medico: m.id},
+    $.enviarGet('<%= host %>/api/v1/agenda/', {medico: m.id},
     function (data) {
       var citas = [];
       _.each(data, function (c) {
@@ -90,7 +90,7 @@ var AgendarVM = function () {
         mascota: self.evento().id_mascota,
         fecha: self.fechaInicio()
       };
-      $.enviarPut('http://backend.veterinarius.com:8000/api/v1/agendae/' + self.evento().id + '/', e,
+      $.enviarPut('<%= host %>/api/v1/agendae/' + self.evento().id + '/', e,
       function (data) {
         vm.main.aviso({level:3, header:'Actualizar cita', body:'Cita actualizada con exito', closeable: true});
         self.evento().start = moment(self.fechaInicio(), moment.HTML5_FMT.DATETIME_LOCAL_SECONDS);
@@ -107,7 +107,7 @@ var AgendarVM = function () {
         mascota: self.mascota().id,
         fecha: self.fechaInicio()
       };
-      $.enviarPost('http://backend.veterinarius.com:8000/api/v1/agendae/', e,
+      $.enviarPost('<%= host %>/api/v1/agendae/', e,
       function (data) {
         vm.main.aviso({level:3, header:'Crear cita', body:'Cita creada con exito', closeable: true});
         $('#div-agenda').fullCalendar('renderEvent', {
@@ -123,7 +123,7 @@ var AgendarVM = function () {
     }
   };
   self.eliminar = function () {
-    $.enviarDelete('http://backend.veterinarius.com:8000/api/v1/agendae/' + self.evento().id + '/', undefined,
+    $.enviarDelete('<%= host %>/api/v1/agendae/' + self.evento().id + '/', undefined,
     function (data) {
       vm.main.aviso({level:3, header:'Eliminar cita', body:'Cita eliminada con exito', closeable: true});
       self.evento().start = moment(self.fechaInicio(), moment.HTML5_FMT.DATETIME_LOCAL_SECONDS);
@@ -147,13 +147,13 @@ var AgendarVM = function () {
       minDate: 0,
       lang: 'es'
     });
-    $.enviarGet('http://backend.veterinarius.com:8000/api/v1/medico/', undefined,
+    $.enviarGet('<%= host %>/api/v1/medico/', undefined,
     function (data) {
       self.medicos([]);
       _.each(data, function (m) {
         self.medicos.push(new personaSel(m));
       });
-      $.enviarGet('http://backend.veterinarius.com:8000/api/v1/propietario/', undefined,
+      $.enviarGet('<%= host %>/api/v1/propietario/', undefined,
       function (data) {
         self.propietarios([]);
         _.each(data, function (p) {
